@@ -1,0 +1,16 @@
+openapi: 3.0.3
+components:
+  securitySchemes:
+    oauth2-example:
+      type: oauth2
+      description: OAuth 2 with Azure NON-PRODUCTION tenant identity provider
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/5109e7bd-0e5a-4d25-a8f3-407a0931f203/oauth2/v2.0/token
+          scopes:
+            'write:echo-message': Read client application security context details
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/5109e7bd-0e5a-4d25-a8f3-407a0931f203/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/5109e7bd-0e5a-4d25-a8f3-407a0931f203/oauth2/v2.0/token
+          scopes:
+            'write:echo-message': Read client application security context details

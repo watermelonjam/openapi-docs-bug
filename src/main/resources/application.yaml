@@ -1,0 +1,41 @@
+quarkus:
+  log:
+    level: INFO
+    min-level: TRACE
+    console:
+      enable: true
+      format: "%d{dd-MM-yyyy HH:mm:ss.SSSZ} [%t] %-5p %c %M - %s%e%n"
+    category:
+      io.extr.odb:
+        level: INFO
+  swagger-ui:
+    always-include: false
+  smallrye-openapi:
+    auto-add-security: false
+    additional-docs-directory: META-INF/openapi/${openapi-security:prod}
+  http:
+    access-log:
+      enabled: true
+      pattern: combined
+      exclude-pattern: "/q/.*"
+    port: 8080
+    cors: 
+      ~: true
+      methods: GET,OPTIONS
+      headers: accept,content-type
+  native:
+    builder-image:
+      quay.io/quarkus/ubi-quarkus-native-image:21.3-java17
+    resources:
+      includes: "META-INF/openapi/**"
+#    additional-build-args: -H:ResourceConfigurationFiles=resources-config.json
+    
+"%dev":
+  quarkus:
+    smallrye-openapi:
+      additional-docs-directory: META-INF/openapi/qa
+"%test":
+  quarkus:
+    smallrye-openapi:
+      additional-docs-directory: META-INF/openapi/qa
+      
